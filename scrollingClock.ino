@@ -11,7 +11,7 @@ RtcDS1302<ThreeWire> Rtc(myWire);
 const byte LDR_PIN = A2;
 const byte DHT_PIN = 6; // Replace with the pin your DHT sensor is connected to
 const byte CS_PIN = A3;
-const byte H_DISPLAYS = 4;
+const byte H_DISPLAYS = 8;
 const byte V_DISPLAYS = 1;
 
 DHT dht(DHT_PIN, DHT11);
@@ -72,7 +72,7 @@ byte ledIntensitySelect(int value) {
 String outputStrClock() {
   RtcDateTime now = Rtc.GetDateTime();
   char buffer[40];
-  snprintf(buffer, sizeof(buffer), "%02d/%02d/%04d %02d:%02d:%02d Temp:%0dC Hum:%d%%", 
+  snprintf(buffer, sizeof(buffer), "%02d/%02d/%04d %02d:%02d:%02d Temp:%0dC RH:%d%%", 
            now.Day(), now.Month(), now.Year(), now.Hour(), now.Minute(), now.Second(),
            static_cast<int>(dht.readTemperature()), static_cast<int>(dht.readHumidity()));
   return String(buffer);
